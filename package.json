@@ -1,0 +1,22 @@
+{
+  "name": "blackjack",
+  "version": "1.0.0",
+  "description": "Simple implementation of a console version of blackjack",
+  "main": "blackjack.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "keywords": [
+    "blackjack",
+    "console",
+    "terminal",
+    "game"
+  ],
+  "author": "Michael J Cooper",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.21.5",
+    "jest": "^29.5.0",
+    "lodash.isequal": "^4.5.0"
+  }
+}
