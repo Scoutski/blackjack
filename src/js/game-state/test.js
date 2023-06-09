@@ -1,5 +1,5 @@
 import { generateInitialState, generateDeck, shuffleDeck, getCardNumericValue } from './index';
-import { FACE_CARDS, checkDecksHaveSameMembersInSameOrder } from '../common';
+import { FACE_CARDS, checkDecksHaveSameMembersInSameOrder } from '../../common';
 
 describe('generateInitialState', () => {
     it('should return expected empty state', () => {

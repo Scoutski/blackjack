@@ -4,7 +4,6 @@
   "description": "Simple implementation of a console version of blackjack",
   "main": "blackjack.js",
   "scripts": {
-    "start": "node ./src/blackjack.js",
     "test": "jest --coverage"
   },
   "keywords": [

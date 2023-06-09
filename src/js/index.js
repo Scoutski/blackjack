@@ -1,5 +1,6 @@
 import { generateInitialState } from './game-state/index.js';
-import { PLAYER_STATE } from './common/index.js';
+import { addCardToBoard, addTextToMessagesDiv } from './dom-interactions/index.js';
+import { PLAYER_STATE, BLACKJACK_MESSAGE, PLAYER_SCORE_TEXT } from './common/index.js';
 
 // Philosophically, I do not want to have side effects in any functions, so anytime
 // state is passed around, we are duplicating it and returning a new object with the
@@ -18,7 +19,7 @@ const playGame = () => {
 
     if (doesPlayerHaveBlackjack) {
         displayPlayerBlackjackMessage();
-        processPayout(boardState);
+        processPayout(boardState.currentBet);
         // endGame();
     } else {
         // getPlayerInput();
@@ -35,6 +36,12 @@ export const dealCards = (boardState) => {
     updatedBoardState.playerCards.push(updatedBoardState.deck.shift());
     updatedBoardState.dealerCards.push(updatedBoardState.deck.shift());
     updatedBoardState.playerCards.push(updatedBoardState.deck.shift());
+
+    updatedBoardState.playerCards.forEach((card) => {
+        addCardToBoard('player', card);
+    })
+
+    addCardToBoard('dealer', updatedBoardState.dealerCards[0]);
 
     console.log('Dealer showing:', updatedBoardState.dealerCards.map((card) => card.displayValue));
     console.log('Player has:', updatedBoardState.playerCards.map((card) => card.displayValue));
@@ -58,7 +65,7 @@ const calculateScores = (boardState) => {
 }
 
 const displayPlayerScores = (boardState) => {
-    console.log('Player score(s) is', boardState.playerTotal);
+    addTextToMessagesDiv(`${PLAYER_SCORE_TEXT} ${boardState.playerTotal.join(' / ')}`)
 }
 
 const checkForPlayerBlackJack = (boardState) => {
@@ -69,11 +76,13 @@ const checkForPlayerBlackJack = (boardState) => {
 }
 
 const displayPlayerBlackjackMessage = () => {
-    console.log('Congratulations! Player has Blackjack!')
+    addTextToMessagesDiv(BLACKJACK_MESSAGE);
 }
 
-const processPayout = (boardState) => {
-
+const processPayout = (betAmount) => {
+    const payout = betAmount * 2;
+    PLAYER_STATE.cashInHand += payout;
+    console.log(`You've been paid out $${payout} and you now have $${PLAYER_STATE.cashInHand} remaining`);
 }
 
 const getPlayerInput = () => {

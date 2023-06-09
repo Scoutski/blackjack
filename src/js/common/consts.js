@@ -4,3 +4,6 @@ export const PLAYER_STATE = {
     handsWon: 0,
     cashInHand: 100,
 };
+
+export const PLAYER_SCORE_TEXT = 'Player score(s) is';
+export const BLACKJACK_MESSAGE = 'Congratulations! Player has Blackjack!';
