@@ -4,7 +4,14 @@ A close friend of mine is currently learning how to program at a bootcamp and th
 
 Please note that this is only a package so I could have a test runner and polyfill a browser's prompt in console.
 
-## Things I'd consider changing
+## TODO lists
+- Add missing tests (Coop, you lazy butt)
+- Implement ability to bet
+- Implement player action buttons
+- Implement dealer autoplay
+- Add in card images
+
+## Things I'd consider as additions in future
 
 - Possibly creating a few different files to separate the types of actions to make it more readable.
 - Allowing for multiple players.

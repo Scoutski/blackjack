@@ -1,13 +1,13 @@
-import { checkDecksHaveSameMembersInSameOrder } from './common';
-import { dealCards } from "./blackjack";
-import { generateInitialState } from './game-state'
+import { checkDecksHaveSameMembersInSameOrder } from '../common/utils';
+import { dealInitialCards } from "./index.js";
+import { generateInitialState } from '../game-state/index.js'
 
-describe('dealCards', () => {
+describe('dealInitialCards', () => {
     it('should not create a side effect by modifying the deck that was passed in', () => {
         const gameState = generateInitialState();
         const shuffledDeckClone = [ ...gameState.deck ];
 
-        const updatedGameState = dealCards(generateInitialState());
+        const updatedGameState = dealInitialCards(generateInitialState());
 
         expect(checkDecksHaveSameMembersInSameOrder(gameState.deck, shuffledDeckClone)).toEqual(true);
         expect(checkDecksHaveSameMembersInSameOrder(gameState.deck, updatedGameState.deck)).toEqual(false);
@@ -17,7 +17,7 @@ describe('dealCards', () => {
         const gameState = generateInitialState();
         const deckClone = [ ...gameState.deck ];
     
-        const updatedGameState = dealCards(gameState);
+        const updatedGameState = dealInitialCards(gameState);
     
         expect(updatedGameState.playerCards.length).toEqual(2);
         expect(updatedGameState.dealerCards.length).toEqual(1);
@@ -28,7 +28,7 @@ describe('dealCards', () => {
         const gameState = generateInitialState();
         const deckClone = [ ...gameState.deck ];
 
-        const updatedGameState = dealCards(gameState);
+        const updatedGameState = dealInitialCards(gameState);
     
         expect(updatedGameState.playerCards[0]).toEqual(deckClone[0]);
         expect(updatedGameState.dealerCards[0]).toEqual(deckClone[1]);
