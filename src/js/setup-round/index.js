@@ -5,14 +5,16 @@ import { PLAYER_STATE, BLACKJACK_MESSAGE, PLAYER_SCORE_TEXT, PLAYER, DEALER } fr
 // Philosophically, I do not want to have side effects in any functions, so anytime
 // state is passed around, we are duplicating it and returning a new object with the
 // relevant updates.
-export const playGame = () => {
-    let boardState = generateInitialState();
-
+export const startRound = () => {
     /*
         This is if I want to handle betting:
         const betAmount = getPlayerBet();
         updateStateForBet(boardState, playerState)
     */
+    // check for a valid bet
+    // if !validBet display error message
+
+    let boardState = generateInitialState();
 
     boardState = dealInitialCards(boardState);
     clearCardsOnDOM();
@@ -26,6 +28,7 @@ export const playGame = () => {
         displayPlayerBlackjackMessage();
         processPayout(boardState.currentBet);
     } else {
+        // displayActionButtons()
         // getPlayerInput();
         // checkForBust();
         // processDealerTurn();

@@ -1,6 +1,6 @@
-import { playGame } from './game/index.js';
+import { startRound } from './setup-round/index.js';
 
 (() => {
     const startButton = document.getElementById('start-button');
-    startButton.onclick = playGame;
+    startButton.onclick = startRound;
 })();
