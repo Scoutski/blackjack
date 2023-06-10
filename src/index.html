@@ -8,14 +8,22 @@
         <title>Blackjack</title>
     </head>
     <body>
+        <div class="player-stats">
+            <div class="wallet"></div>
+        </div>
+
         <div class="board">
             <div class="dealer cards"></div>
             <div class="player cards"></div>
         </div>
 
-        <div class="messages"></div>
-        <div class="buttons-container">
-            <button id="start-button">Start</button>
+        <div class="messages">
+            Please place your bet and hit Deal!
+        </div>
+
+        <div class="actions-container">
+            <input class="bet-input" type="number">
+            <button id="start-button" class="button">Deal</button>
         </div>
     </body>
     <script src="js/index.js"  type="module"></script>

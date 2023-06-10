@@ -1,21 +1,22 @@
 import { generateInitialState } from '../game-state/index.js';
-import { addAllCardsToDOM, addTextToMessagesDiv, clearCardsOnDOM } from '../dom-interactions/index.js';
-import { PLAYER_STATE, BLACKJACK_MESSAGE, PLAYER_SCORE_TEXT, PLAYER, DEALER } from '../common/consts.js';
+import { addAllCardsToDOM, addTextToMessagesDiv, clearCardsOnDOM, displayPlayerBlackjackMessage } from '../dom-interactions/index.js';
+import { PLAYER_STATE, PLAYER_SCORE_TEXT, PLAYER, DEALER } from '../common/consts.js';
 
 // Philosophically, I do not want to have side effects in any functions, so anytime
 // state is passed around, we are duplicating it and returning a new object with the
 // relevant updates.
-export const startRound = () => {
-    /*
-        This is if I want to handle betting:
-        const betAmount = getPlayerBet();
-        updateStateForBet(boardState, playerState)
-    */
-    // check for a valid bet
-    // if !validBet display error message
+export const setupAndDeal = () => {
+    // TODO: Clean up and make more readable
+    const betAmount = getPlayerBet();
+    if (!isValidBet(betAmount)) {
+        addTextToMessagesDiv(`Invalid bet amount: ${betAmount}, please bet between 1 and ${.1 * PLAYER_STATE.cashInHand}`);
+        return;
+    } else {
+        removeBetFromPlayerState(betAmount);
+        // removeBetButtons();
+    }
 
-    let boardState = generateInitialState();
-
+    let boardState = generateInitialState(betAmount);
     boardState = dealInitialCards(boardState);
     clearCardsOnDOM();
     addAllCardsToDOM(boardState);
@@ -27,15 +28,38 @@ export const startRound = () => {
     if (doesPlayerHaveBlackjack) {
         displayPlayerBlackjackMessage();
         processPayout(boardState.currentBet);
+        resetButtons();
     } else {
-        // displayActionButtons()
-        // getPlayerInput();
-        // checkForBust();
-        // processDealerTurn();
-        // calculateScore();
-        // updateTotals();
-        // clearBoardState();
+        displayActionButtons()
+        
     }
+};
+
+export const getPlayerBet = () => {
+    const betInput = document.getElementsByClassName('bet-input')[0];
+    return Math.round(Number(betInput.value));
+};
+
+export const isValidBet = (betAmount) => {
+    let isValid = true;
+
+    if (isNaN(betAmount)) {
+        isValid = false;
+    };
+
+    if (betAmount < 1) {
+        isValid = false;
+    };
+
+    if (betAmount > (.1 * PLAYER_STATE.cashInHand)) {
+        isValid = false;
+    };
+
+    return isValid;
+};
+
+export const removeBetFromPlayerState = (betAmount) => {
+    PLAYER_STATE.cashInHand -= betAmount;
 };
 
 export const dealInitialCards = (boardState) => {
@@ -86,14 +110,8 @@ const checkForPlayerBlackJack = (boardState) => {
     return doesPlayerHaveTwoCards && doesPlayerHaveTwentyOne;
 }
 
-const displayPlayerBlackjackMessage = () => {
-    addTextToMessagesDiv(BLACKJACK_MESSAGE);
-}
-
 const processPayout = (betAmount) => {
     const payout = betAmount * 2;
     PLAYER_STATE.cashInHand += payout;
     console.log(`You've been paid out $${payout} and you now have $${PLAYER_STATE.cashInHand} remaining`);
 }
-
-// playGame();

@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { getCardSVG, addTextToMessagesDiv, getInvalidCardPlacementLocationMessage, createCardImage, clearCardsOnDOM, addCardToDOM, addAllCardsToDOM } from './index.js';
+import { getCardSVG, addTextToMessagesDiv, getInvalidCardPlacementLocationMessage, createCardImage, clearCardsOnDOM, addCardToDOM, addAllCardsToDOM, displayPlayerBlackjackMessage } from './index.js';
 import {
     DECK_FILEPATH,
     SVG_EXTENSION,
@@ -9,6 +9,7 @@ import {
     INVALID_CARD_PLACEMENT_LOCATION_MESAGE,
     CARD_CLASS_NAME,
     MESSAGES_CLASS_NAME,
+    BLACKJACK_MESSAGE,
 } from './consts.js';
 import { PLAYER, DEALER } from '../common/consts.js';
 
@@ -130,8 +131,7 @@ describe('getCardSVG', () => {
 describe('addTextToMessagesDiv', () => {
     it('should set the given message to the first .messages elements innerText', () => {
         document.body.innerHTML =
-        `<div class=${MESSAGES_CLASS_NAME}>` +
-        '</div>';
+        `<div class=${MESSAGES_CLASS_NAME}></div>`;
 
         const testMessage = 'Black Knight is playable in 2023';
 
@@ -170,5 +170,17 @@ describe('createCardImage', () => {
 
         expect(result.src.endsWith(getCardSVG(testCardName))).toEqual(true);
         expect(result.className).toEqual(CARD_CLASS_NAME);
+    });
+});
+
+describe('displayPlayerBlackjackMessage', () => {
+    it('should add the BLACKJACK_MESSAGE to the messages div', () => {
+        document.body.innerHTML =
+        `<div class=${MESSAGES_CLASS_NAME}></div>`;
+
+        displayPlayerBlackjackMessage();
+
+        const messagesDiv = document.getElementsByClassName(MESSAGES_CLASS_NAME)[0];
+        expect(messagesDiv.innerText).toEqual(BLACKJACK_MESSAGE);
     });
 });

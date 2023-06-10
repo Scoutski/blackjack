@@ -5,7 +5,8 @@ import {
     SVG_EXTENSION,
     MISSING_MESSAGES_ELEMENT_MESSAGE,
     MESSAGES_CLASS_NAME,
-    CARD_CLASS_NAME
+    CARD_CLASS_NAME,
+    BLACKJACK_MESSAGE,
 } from './consts.js';
 
 export const addAllCardsToDOM = (boardState) => {
@@ -63,3 +64,7 @@ export const addTextToMessagesDiv = (message) => {
 
     messagesElement.innerText = message;
 };
+
+export const displayPlayerBlackjackMessage = () => {
+    addTextToMessagesDiv(BLACKJACK_MESSAGE);
+}

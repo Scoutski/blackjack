@@ -1,9 +1,9 @@
 import { FACE_CARDS } from "../common/consts.js";
 
-export const generateInitialState = function() {
+export const generateInitialState = function(betAmount) {
     return {
         deck: shuffleDeck(generateDeck()),
-        currentBet: 0,
+        currentBet: betAmount,
         playerCards: [],
         playerTotal: [0],
         dealerCards: [],

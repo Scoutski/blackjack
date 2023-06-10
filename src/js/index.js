@@ -1,6 +1,6 @@
-import { startRound } from './setup-round/index.js';
+import { setupAndDeal } from './setup-and-deal/index.js';
 
 (() => {
     const startButton = document.getElementById('start-button');
-    startButton.onclick = startRound;
+    startButton.onclick = setupAndDeal;
 })();

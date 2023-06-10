@@ -4,10 +4,11 @@ import { checkDecksHaveSameMembersInSameOrder } from '../common/utils.js';
 
 describe('generateInitialState', () => {
     it('should return expected empty state', () => {
-        const result = generateInitialState();
+        const betAmount = 10;
+        const result = generateInitialState(betAmount);
 
         expect(result).toMatchObject({
-            currentBet: 0,
+            currentBet: betAmount,
             playerCards: [],
             playerTotal: [0],
             dealerCards: [],
