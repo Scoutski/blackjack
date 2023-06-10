@@ -1,6 +1,6 @@
-import { generateInitialState, generateDeck, shuffleDeck, getCardNumericValue } from './index';
-import { FACE_CARDS } from '../common';
-import { checkDecksHaveSameMembersInSameOrder } from '../common/utils';
+import { generateInitialState, generateDeck, shuffleDeck, getCardNumericValue } from './index.js';
+import { FACE_CARDS } from '../common/consts.js';
+import { checkDecksHaveSameMembersInSameOrder } from '../common/utils.js';
 
 describe('generateInitialState', () => {
     it('should return expected empty state', () => {

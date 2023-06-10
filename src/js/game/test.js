@@ -1,4 +1,4 @@
-import { checkDecksHaveSameMembersInSameOrder } from '../common/utils';
+import { checkDecksHaveSameMembersInSameOrder } from '../common/utils.js';
 import { dealInitialCards } from "./index.js";
 import { generateInitialState } from '../game-state/index.js'
 

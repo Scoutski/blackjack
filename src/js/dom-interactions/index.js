@@ -1,8 +1,6 @@
-import { PLAYER, DEALER } from "../common/index.js";
+import { PLAYER, DEALER } from "../common/consts.js";
 
 export const addAllCardsToDOM = (boardState) => {
-    clearCardsOnDOM();
-
     boardState.playerCards.forEach((card) => {
         addCardToDOM(PLAYER, card);
     });
@@ -13,8 +11,8 @@ export const addAllCardsToDOM = (boardState) => {
 };
 
 export const clearCardsOnDOM = () => {
-    document.getElementsByClassName(PLAYER)[0].innerText = '';
-    document.getElementsByClassName(DEALER)[0].innerText = '';
+    document.getElementsByClassName(PLAYER)[0].innerHTML = '';
+    document.getElementsByClassName(DEALER)[0].innerHTML = '';
 };
 
 export const addCardToDOM = (location, card) => {
@@ -26,7 +24,21 @@ export const addCardToDOM = (location, card) => {
         domElement = document.getElementsByClassName(PLAYER)[0];
     }
 
-    domElement.innerText += ' ' + card.displayValue;
+    console.log('card', card);
+
+    domElement.appendChild(createCardImage(card.displayValue));
+};
+
+export const createCardImage = (cardName) => {
+    const cardImage = document.createElement('img');
+    cardImage.src = getCardSVG(cardName);
+    cardImage.className = 'card';
+
+    return cardImage;
+};
+
+export const getCardSVG = (cardName) => {
+    return `assets/images/deck/${cardName}.svg`;
 };
 
 export const addTextToMessagesDiv = (message) => {

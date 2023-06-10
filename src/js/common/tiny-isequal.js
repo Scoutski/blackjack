@@ -1,3 +1,6 @@
+// Taken from https://www.npmjs.com/package/@ngard/tiny-isequal
+// I only use this for tests, but didn't want to import the module
+
 Object.defineProperty(exports, "__esModule", {
     value: true
   });

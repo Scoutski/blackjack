@@ -1,4 +1,4 @@
-import { FACE_CARDS } from "../common/index.js";
+import { FACE_CARDS } from "../common/consts.js";
 
 export const generateInitialState = function() {
     return {
