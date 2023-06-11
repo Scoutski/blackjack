@@ -11,3 +11,5 @@ export const PLAYER = 'player';
 export const DEALER = 'dealer';
 
 export const PLAYER_SCORE_TEXT = 'Player score(s) is';
+
+export const BLACKJACK_MULTIPLIER = 1.5;

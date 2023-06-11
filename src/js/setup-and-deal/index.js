@@ -1,6 +1,19 @@
 import { generateInitialState } from '../game-state/index.js';
-import { addAllCardsToDOM, addTextToMessagesDiv, clearCardsOnDOM, displayPlayerBlackjackMessage } from '../dom-interactions/index.js';
-import { PLAYER_STATE, PLAYER_SCORE_TEXT, PLAYER, DEALER } from '../common/consts.js';
+import {
+    addAllCardsToDOM,
+    addTextToMessagesDiv,
+    clearCardsOnDOM,
+    displayPlayerBlackjackMessage,
+    updateWalletOnDOM,
+    toggleBetInterface,
+} from '../dom-interactions/index.js';
+import {
+    PLAYER_STATE,
+    PLAYER_SCORE_TEXT,
+    PLAYER,
+    DEALER,
+    BLACKJACK_MULTIPLIER
+} from '../common/consts.js';
 
 // Philosophically, I do not want to have side effects in any functions, so anytime
 // state is passed around, we are duplicating it and returning a new object with the
@@ -13,7 +26,8 @@ export const setupAndDeal = () => {
         return;
     } else {
         removeBetFromPlayerState(betAmount);
-        // removeBetButtons();
+        updateWalletOnDOM();
+        toggleBetInterface();
     }
 
     let boardState = generateInitialState(betAmount);
@@ -27,10 +41,11 @@ export const setupAndDeal = () => {
     const doesPlayerHaveBlackjack = checkForPlayerBlackJack(boardState);
     if (doesPlayerHaveBlackjack) {
         displayPlayerBlackjackMessage();
-        processPayout(boardState.currentBet);
+        processPayout(boardState.currentBet * BLACKJACK_MULTIPLIER);
+        updateWalletOnDOM();
         resetButtons();
     } else {
-        displayActionButtons()
+        // displayActionButtons()
         
     }
 };

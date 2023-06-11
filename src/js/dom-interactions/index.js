@@ -1,4 +1,4 @@
-import { PLAYER, DEALER } from '../common/consts.js';
+import { PLAYER, DEALER, PLAYER_STATE } from '../common/consts.js';
 import {
     INVALID_CARD_PLACEMENT_LOCATION_MESAGE,
     DECK_FILEPATH,
@@ -7,6 +7,12 @@ import {
     MESSAGES_CLASS_NAME,
     CARD_CLASS_NAME,
     BLACKJACK_MESSAGE,
+    WALLET_CLASS_NAME,
+    WALLET_PREFIX_MESSAGE,
+    MISSING_WALLET_ELEMENT_MESSAGE,
+    ELEMENT_TO_TOGGLE_NOT_FOUND_MESSAGE,
+    START_BUTTON_CLASS_NAME,
+    BET_INPUT_CLASS_NAME,
 } from './consts.js';
 
 export const addAllCardsToDOM = (boardState) => {
@@ -67,4 +73,33 @@ export const addTextToMessagesDiv = (message) => {
 
 export const displayPlayerBlackjackMessage = () => {
     addTextToMessagesDiv(BLACKJACK_MESSAGE);
+}
+
+export const updateWalletOnDOM = () => {
+    const walletElement = document.getElementsByClassName(WALLET_CLASS_NAME)[0]
+
+    if (!walletElement) {
+        throw new Error(MISSING_WALLET_ELEMENT_MESSAGE);
+    }
+
+    walletElement.innerText = `${WALLET_PREFIX_MESSAGE}${PLAYER_STATE.cashInHand}`;
+}
+
+export const toggleBetInterface = () => {
+    toggleElementDisplay(START_BUTTON_CLASS_NAME);
+    toggleElementDisplay(BET_INPUT_CLASS_NAME);
+};
+
+export const displayPlayerInteractionButtons = () => {
+    
+};
+
+export const toggleElementDisplay = (className) => {
+    try {
+        const element = document.getElementsByClassName(className);
+
+        element[0].style.display = element[0].style.display === "none" ? "" : "none";
+    } catch (e) {
+        throw new Error(`${ELEMENT_TO_TOGGLE_NOT_FOUND_MESSAGE}${className}`);
+    }
 }
